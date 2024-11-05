@@ -1,6 +1,6 @@
 // NOTE: Use the many #define settings below to customize this keymap!
-#define OPERATING_SYSTEM 'L' // choose 'L'inux, 'M'acOS, or 'W'indows
-#define DIFFICULTY_LEVEL  0  // 0:custom, 1:easy -> 5:hard (see below)
+#define OPERATING_SYSTEM 'M' // choose 'L'inux, 'M'acOS, or 'W'indows
+#define DIFFICULTY_LEVEL  4  // 0:custom, 1:easy -> 5:hard (see below)
 #define ENFORCE_BILATERAL    // cancels single-handed home row mod+tap
 //#define SHIFT_FORGIVENESS  // requires 24.08-beta1 or newer firmware
 #define WORLD_USE_COMPOSE    // use native Compose in place of Unicode
@@ -71,6 +71,8 @@
 #define _FIND       _C(F)
 #define _FIND_NEXT  _C(G)
 #define _FIND_PREV  _C(LS(G))
+#define _MEH        LC(LS(LSHFT))
+#define _HYPER      LG(_MEH)
 
 //
 // USE_NUMPAD_KEYCODES puts `KP_*` keycodes into the Number layer.
@@ -913,14 +915,6 @@ combos {
     #ifndef COMBO_FIRING_DECAY
     #define COMBO_FIRING_DECAY 50
     #endif
-    #ifdef LAYER_Gaming
-    combo_gaming_layer_toggle {
-        timeout-ms = <COMBO_FIRING_DECAY>;
-        key-positions = <POS_LH_T3 POS_LH_T6>;
-        bindings = <&tog LAYER_Gaming>;
-        layers = <0 LAYER_Gaming>;
-    };
-    #endif
     #ifdef _A_TAB
     combo_alt_tab_switcher {
         timeout-ms = <COMBO_FIRING_DECAY>;
@@ -985,7 +979,7 @@ combos {
     combo_copy {
         timeout-ms = <COMBO_FIRING_DECAY>;
         key-positions = <KEY_LH_C4R5 KEY_LH_C3R5>;  // X + C
-        bindings = <&kp LG(C)>;  // cmd+c for macOS
+        bindings = <&kp _COPY>;  // cmd+c for macOS
         layers = <0 1 2 3 4 5 6 7 8>;
     };
 
@@ -999,7 +993,7 @@ combos {
     combo_paste {
         timeout-ms = <COMBO_FIRING_DECAY>;
         key-positions = <KEY_LH_C3R5 KEY_LH_C2R5>;  // C + V
-        bindings = <&kp LG(V)>;  // cmd+v
+        bindings = <&kp _PASTE>;  // cmd+v
         layers = <0 1 2 3 4 5 6 7 8>;
     };
 
@@ -1024,7 +1018,60 @@ combos {
         layers = <0 1 2 3 4 5 6 7 8>;
     };
 
+    combo_emoji {
+        timeout-ms = <COMBO_FIRING_DECAY>;
+        key-positions = <KEY_RH_C2R4 KEY_RH_C4R4>;  // J + L
+        bindings = <&kp LC(LG(SPACE))>;  // ctrl+cmd+space
+        layers = <0 1 2 3 4 5 6 7 8>;
+    };
 
+    // Screen Capture
+
+    // Capture Screen for Application
+    combo_cap_screen {
+        timeout-ms = <COMBO_FIRING_DECAY>;
+        key-positions = <KEY_LH_C5R2 KEY_LH_C4R2>;  // 1 + 2
+        bindings = <&kp LG(LS(N1))>;  // cmd+shift+1
+        layers = <0 1 2 3 4 5 6 7 8>;
+    };
+
+    // Capture Screen (2+3)
+    combo_cap_screen {
+        timeout-ms = <COMBO_FIRING_DECAY>;
+        key-positions = <KEY_LH_C4R2 KEY_LH_C3R2>;  // 2 + 3
+        bindings = <&kp LG(LS(N3))>;  // cmd+shift+3
+        layers = <0 1 2 3 4 5 6 7 8>;
+    };
+
+    // Capture Window (3+4)
+    combo_cap_window {
+        timeout-ms = <COMBO_FIRING_DECAY>;
+        key-positions = <KEY_LH_C3R2 KEY_LH_C2R2>;  // 3 + 4
+        bindings = <&kp LG(LS(N4))>;  // cmd+shift+4
+        layers = <0 1 2 3 4 5 6 7 8>;
+    };
+
+    // Capture All-in-one (2+3+4)
+    combo_capture_all {
+        timeout-ms = <COMBO_FIRING_DECAY>;
+        key-positions = <KEY_LH_C4R2 KEY_LH_C3R2 KEY_LH_C2R2>;  // 2 + 3 + 4
+        bindings = <&kp LG(LS(N5))>;  // cmd+shift+5
+        layers = <0 1 2 3 4 5 6 7 8>;
+    };
+
+    combo_loom {
+        timeout-ms = <COMBO_FIRING_DECAY>;
+        key-positions = <KEY_LH_C4R2 KEY_LH_C2R2>;  // 2 + 4
+        bindings = <&kp LG(LS(N7))>;  // cmd+shift+7
+        layers = <0 1 2 3 4 5 6 7 8>;
+    };
+
+    combo_record_screen {
+        timeout-ms = <COMBO_FIRING_DECAY>;
+        key-positions = <KEY_LH_C3R2 KEY_LH_C2R2 KEY_LH_C1R2>;  // 3 + 4 + 5
+        bindings = <&kp LG(LS(N8))>;  // cmd+shift+8
+        layers = <0 1 2 3 4 5 6 7 8>;
+    };
 
     // Application Control
 
@@ -1190,6 +1237,50 @@ combos {
         timeout-ms = <COMBO_FIRING_DECAY>;
         key-positions = <KEY_LH_C5R2 KEY_LH_C4R3>;  // 1 + W
         bindings = <&kp C_MUTE>;  // Mute media key
+        layers = <0 1 2 3 4 5 6 7 8>;
+    };
+
+    // SPECIAL COMBOS
+
+    combo_raycast {
+        timeout-ms = <COMBO_FIRING_DECAY>;
+        key-positions = <KEY_RH_C2R4 KEY_RH_C3R4>;  // J + K
+        bindings = <&kp LG(SPACE)>;  // cmd+space
+        layers = <0 1 2 3 4 5 6 7 8>;
+    };
+
+    combo_raycast_ai {
+        timeout-ms = <COMBO_FIRING_DECAY>;
+        key-positions = <KEY_LH_C3R4 KEY_LH_C2R4>;  // D + F
+        bindings = <&kp LA(LG(LS(SPACE)))>;  // opt+cmd+shift+space
+        layers = <0 1 2 3 4 5 6 7 8>;
+    };
+
+    combo_1password {
+        timeout-ms = <COMBO_FIRING_DECAY>;
+        key-positions = <KEY_RH_C3R4 KEY_RH_C4R4>;  // K + L
+        bindings = <&kp LG(LS(SPACE))>;  // cmd+shift+space
+        layers = <0 1 2 3 4 5 6 7 8>;
+    };
+
+    combo_calendar {
+        timeout-ms = <COMBO_FIRING_DECAY>;
+        key-positions = <KEY_LH_C3R5 KEY_RH_C4R4>;  // C + L
+        bindings = <&kp LA(LC(SPACE))>;  // opt+ctrl
+        layers = <0 1 2 3 4 5 6 7 8>;
+    };
+
+    combo_dictate {
+        timeout-ms = <COMBO_FIRING_DECAY>;
+        key-positions = <KEY_LH_C4R4 KEY_LH_C3R4 KEY_LH_C2R4>;  // S + D + F
+        bindings = <&kp LC(LS(SPACE))>;  // ctrl+shift+space
+        layers = <0 1 2 3 4 5 6 7 8>;
+    };
+
+    combo_homerow {
+        timeout-ms = <COMBO_FIRING_DECAY>;
+        key-positions = <KEY_RH_C2R4 KEY_RH_C3R4 KEY_RH_C4R4>;  // J + K + L
+        bindings = <&kp LA(LS(SPACE))>;  // opt+shift+space
         layers = <0 1 2 3 4 5 6 7 8>;
     };
 
@@ -4544,6 +4635,152 @@ macros {
 
     //////////////////////////////////////////////////////////////////////////
     //
+    // MG Custom Layer for AeroSpace Control
+    //
+    //////////////////////////////////////////////////////////////////////////
+
+    //
+    // AERO_HOLD defines how long you have (milliseconds) to complete
+    // an aerospace tap dance command sequence.
+    //
+    #define AERO_HOLD 100
+
+    //
+    // AERO_MAIN defines the primary modifier combination for aerospace commands
+    // (alt+shift+ctrl by default)
+    //
+    #define AERO_MAIN _MEH
+
+    //
+    // AERO_SECONDARY defines the secondary modifier combination
+    // (gui+alt+shift+ctrl by default) 
+    //
+    #define AERO_SECONDARY _HYPER
+
+    // Main AERO behavior definition
+    #define AERO(KEYCODE) \
+        aero_##KEYCODE: aerospace_##KEYCODE { \
+            compatible = "zmk,behavior-hold-tap"; \
+            label = "AEROSPACE_" #KEYCODE; \
+            #binding-cells = <2>; \
+            tapping-term-ms = <AERO_HOLD>; \
+            quick-tap-ms = <0>; \
+            flavor = "tap-preferred"; \
+            bindings = <&kp AERO_SECONDARY>, <&kp AERO_MAIN>; \
+        };
+
+    // Specific commands:
+
+    // Numbers
+    AERO(N1)     // 1
+    AERO(N2)     // 2
+    AERO(N3)     // 3
+    AERO(N4)     // 4
+    AERO(N5)     // 5
+    AERO(N6)     // 6
+    AERO(N7)     // 7
+    AERO(N8)     // 8
+    AERO(N9)     // 9
+    AERO(N0)     // 0
+
+    // Letters
+    AERO(A)      // a
+    AERO(B)      // b
+    AERO(C)      // c
+    AERO(D)      // d
+    AERO(E)      // e
+    AERO(F)      // f
+    AERO(G)      // g
+    AERO(H)      // h
+    AERO(I)      // i
+    AERO(J)      // j
+    AERO(K)      // k
+    AERO(L)      // l
+    AERO(M)      // m
+    AERO(N)      // n
+    AERO(O)      // o
+    AERO(P)      // p
+    AERO(Q)      // q
+    AERO(R)      // r
+    AERO(S)      // s
+    AERO(T)      // t
+    AERO(U)      // u
+    AERO(V)      // v
+    AERO(W)      // w
+    AERO(X)      // x
+    AERO(Y)      // y
+    AERO(Z)      // z
+
+    // Special keys
+    AERO(MINUS)          // minus
+    AERO(EQUAL)          // equal
+    AERO(DOT)            // period
+    AERO(COMMA)          // comma
+    AERO(FSLH)           // forward slash
+    AERO(BSLH)           // backslash
+    AERO(SQT)            // single quote
+    AERO(SEMI)           // semicolon
+    AERO(GRAVE)          // grave/backtick
+    AERO(LBKT)           // left bracket
+    AERO(RBKT)           // right bracket
+    AERO(SPACE)          // space
+    AERO(RET)            // return/enter (should be RET not ENTER)
+    AERO(ESC)            // escape
+    AERO(BSPC)           // backspace
+    AERO(TAB)            // tab
+
+    // Function keys
+    AERO(F1)             // f1
+    AERO(F2)             // f2
+    AERO(F3)             // f3
+    AERO(F4)             // f4
+    AERO(F5)             // f5
+    AERO(F6)             // f6
+    AERO(F7)             // f7
+    AERO(F8)             // f8
+    AERO(F9)             // f9
+    AERO(F10)            // f10
+    AERO(F11)            // f11
+    AERO(F12)            // f12
+    AERO(F13)            // f13
+    AERO(F14)            // f14
+    AERO(F15)            // f15
+    AERO(F16)            // f16
+    AERO(F17)            // f17
+    AERO(F18)            // f18
+    AERO(F19)            // f19
+    AERO(F20)            // f20
+
+    // Arrows
+    AERO(LEFT)           // left
+    AERO(DOWN)           // down
+    AERO(UP)             // up
+    AERO(RIGHT)          // right
+
+    // Keypad numbers
+    AERO(KP_N0)          // keypad0
+    AERO(KP_N1)          // keypad1
+    AERO(KP_N2)          // keypad2
+    AERO(KP_N3)          // keypad3
+    AERO(KP_N4)          // keypad4
+    AERO(KP_N5)          // keypad5
+    AERO(KP_N6)          // keypad6
+    AERO(KP_N7)          // keypad7
+    AERO(KP_N8)          // keypad8
+    AERO(KP_N9)          // keypad9
+
+    // Keypad special
+    AERO(KP_CLEAR)       // keypadClear
+    AERO(KP_DOT)         // keypadDecimalMark
+    AERO(KP_DIVIDE)      // keypadDivide
+    AERO(KP_ENTER)       // keypadEnter
+    AERO(KP_EQUAL)       // keypadEqual
+    AERO(KP_MINUS)       // keypadMinus
+    AERO(KP_MULTIPLY)    // keypadMultiply
+    AERO(KP_PLUS)        // keypadPlus
+
+    //////////////////////////////////////////////////////////////////////////
+    //
     // Approximation of Pascal Getreuer's Select Word macro from QMK
     // - https://getreuer.info/posts/keyboards/select-word/index.html
     //
@@ -4642,6 +4879,26 @@ macros {
         wait-ms = <SELECT_WORD_DELAY>;
         tap-ms = <SELECT_WORD_DELAY>;
         bindings = <&kp LS(UP) &kp LS(_HOME)>;
+    )
+
+    //
+    // select current paragraph
+    //
+    select_paragraph: select_paragraph {
+        compatible = "zmk,behavior-mod-morph";
+        #binding-cells = <0>;
+        bindings = <&select_paragraph_up>, <&select_paragraph_down>;
+        mods = <(MOD_LSFT|MOD_RSFT)>;
+    };
+    ZMK_MACRO(select_paragraph_up,
+        wait-ms = <SELECT_WORD_DELAY>;
+        tap-ms = <SELECT_WORD_DELAY>;
+        bindings = <&kp _W(UP) &kp _W(LS(DOWN))>;
+    )
+    ZMK_MACRO(select_paragraph_down,
+        wait-ms = <SELECT_WORD_DELAY>;
+        tap-ms = <SELECT_WORD_DELAY>;
+        bindings = <&kp _W(DOWN) &kp _W(LS(UP))>;
     )
 
     //////////////////////////////////////////////////////////////////////////
