@@ -4667,7 +4667,7 @@ macros {
                 tapping-term-ms = <AERO_HOLD>;  // Using the AERO_HOLD you already defined
                 quick-tap-ms = <0>;
                 flavor = "tap-preferred";
-                bindings = <&kp>, <&kp>;
+                bindings = <&kp AERO_SECONDARY>, <&kp AERO_MAIN>;
             };
         };
     };
