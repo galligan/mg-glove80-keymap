@@ -4658,126 +4658,19 @@ macros {
     #define AERO_SECONDARY _HYPER
 
     // Main AERO behavior definition
-    #define AERO(KEYCODE) \
-        aero_##KEYCODE: aerospace_##KEYCODE { \
-            compatible = "zmk,behavior-hold-tap"; \
-            label = "AEROSPACE_" #KEYCODE; \
-            #binding-cells = <2>; \
-            tapping-term-ms = <AERO_HOLD>; \
-            quick-tap-ms = <0>; \
-            flavor = "tap-preferred"; \
-            bindings = <&kp AERO_SECONDARY>, <&kp AERO_MAIN>; \
+    / {
+        behaviors {
+            aero: aerospace {
+                compatible = "zmk,behavior-hold-tap";
+                label = "AEROSPACE";
+                #binding-cells = <2>;
+                tapping-term-ms = <AERO_HOLD>;  // Using the AERO_HOLD you already defined
+                quick-tap-ms = <0>;
+                flavor = "tap-preferred";
+                bindings = <&kp>, <&kp>;
+            };
         };
-
-    // Specific commands:
-
-    // Numbers
-    AERO(N1)     // 1
-    AERO(N2)     // 2
-    AERO(N3)     // 3
-    AERO(N4)     // 4
-    AERO(N5)     // 5
-    AERO(N6)     // 6
-    AERO(N7)     // 7
-    AERO(N8)     // 8
-    AERO(N9)     // 9
-    AERO(N0)     // 0
-
-    // Letters
-    AERO(A)      // a
-    AERO(B)      // b
-    AERO(C)      // c
-    AERO(D)      // d
-    AERO(E)      // e
-    AERO(F)      // f
-    AERO(G)      // g
-    AERO(H)      // h
-    AERO(I)      // i
-    AERO(J)      // j
-    AERO(K)      // k
-    AERO(L)      // l
-    AERO(M)      // m
-    AERO(N)      // n
-    AERO(O)      // o
-    AERO(P)      // p
-    AERO(Q)      // q
-    AERO(R)      // r
-    AERO(S)      // s
-    AERO(T)      // t
-    AERO(U)      // u
-    AERO(V)      // v
-    AERO(W)      // w
-    AERO(X)      // x
-    AERO(Y)      // y
-    AERO(Z)      // z
-
-    // Special keys
-    AERO(MINUS)          // minus
-    AERO(EQUAL)          // equal
-    AERO(DOT)            // period
-    AERO(COMMA)          // comma
-    AERO(FSLH)           // forward slash
-    AERO(BSLH)           // backslash
-    AERO(SQT)            // single quote
-    AERO(SEMI)           // semicolon
-    AERO(GRAVE)          // grave/backtick
-    AERO(LBKT)           // left bracket
-    AERO(RBKT)           // right bracket
-    AERO(SPACE)          // space
-    AERO(RET)            // return/enter (should be RET not ENTER)
-    AERO(ESC)            // escape
-    AERO(BSPC)           // backspace
-    AERO(TAB)            // tab
-
-    // Function keys
-    AERO(F1)             // f1
-    AERO(F2)             // f2
-    AERO(F3)             // f3
-    AERO(F4)             // f4
-    AERO(F5)             // f5
-    AERO(F6)             // f6
-    AERO(F7)             // f7
-    AERO(F8)             // f8
-    AERO(F9)             // f9
-    AERO(F10)            // f10
-    AERO(F11)            // f11
-    AERO(F12)            // f12
-    AERO(F13)            // f13
-    AERO(F14)            // f14
-    AERO(F15)            // f15
-    AERO(F16)            // f16
-    AERO(F17)            // f17
-    AERO(F18)            // f18
-    AERO(F19)            // f19
-    AERO(F20)            // f20
-
-    // Arrows
-    AERO(LEFT)           // left
-    AERO(DOWN)           // down
-    AERO(UP)             // up
-    AERO(RIGHT)          // right
-
-    // Keypad numbers
-    AERO(KP_N0)          // keypad0
-    AERO(KP_N1)          // keypad1
-    AERO(KP_N2)          // keypad2
-    AERO(KP_N3)          // keypad3
-    AERO(KP_N4)          // keypad4
-    AERO(KP_N5)          // keypad5
-    AERO(KP_N6)          // keypad6
-    AERO(KP_N7)          // keypad7
-    AERO(KP_N8)          // keypad8
-    AERO(KP_N9)          // keypad9
-
-    // Keypad special
-    AERO(KP_CLEAR)       // keypadClear
-    AERO(KP_DOT)         // keypadDecimalMark
-    AERO(KP_DIVIDE)      // keypadDivide
-    AERO(KP_ENTER)       // keypadEnter
-    AERO(KP_EQUAL)       // keypadEqual
-    AERO(KP_MINUS)       // keypadMinus
-    AERO(KP_MULTIPLY)    // keypadMultiply
-    AERO(KP_PLUS)        // keypadPlus
+    };
 
     //////////////////////////////////////////////////////////////////////////
     //
