@@ -71,8 +71,9 @@
 #define _FIND       _C(F)
 #define _FIND_NEXT  _C(G)
 #define _FIND_PREV  _C(LS(G))
-#define _MEH        LC(LS(LA))
+#define _MEH        LC(LS(LALT))
 #define _HYPER      _C(_MEH)
+#define _RAYCAST    _C(SPACE)
 
 //
 // USE_NUMPAD_KEYCODES puts `KP_*` keycodes into the Number layer.
@@ -913,7 +914,18 @@ combos {
     // after pressing the first key in a ZMK combo to finish the whole chord.
     //
     #ifndef COMBO_FIRING_DECAY
-    #define COMBO_FIRING_DECAY 50
+    #define COMBO_FIRING_DECAY 30
+    #endif
+    #ifndef COMBO_FIRING_FAST
+    #define COMBO_FIRING_FAST 15
+    #endif
+    #ifdef LAYER_Gaming
+    combo_gaming_layer_toggle {
+        timeout-ms = <COMBO_FIRING_DECAY>;
+        key-positions = <POS_LH_T3 POS_LH_T6>;
+        bindings = <&tog LAYER_Gaming>;
+        layers = <0 LAYER_Gaming>;
+    };
     #endif
     #ifdef _A_TAB
     combo_alt_tab_switcher {
@@ -985,8 +997,8 @@ combos {
 
     combo_copy_plus {
         timeout-ms = <COMBO_FIRING_DECAY>;
-        key-positions = <POS_LH_C5R5 POS_LH_C3R5>;  // Z + C
-        bindings = <&kp LS(LG(C))>;  // cmd+shift+c
+        key-positions = <POS_LH_C4R4 POS_LH_C3R5>;  // S + C
+        bindings = <&kp LS(_C(C))>;  // cmd+shift+c
         layers = <0 1 2 3 4 5 6 7 8>;
     };
 
@@ -999,8 +1011,15 @@ combos {
 
     combo_paste_plus {
         timeout-ms = <COMBO_FIRING_DECAY>;
-        key-positions = <POS_LH_C5R5 POS_LH_C2R5>;  // Z + V
-        bindings = <&kp LS(LG(V))>;  // cmd+shift+v
+        key-positions = <POS_LH_C4R4 POS_LH_C2R5>;  // S + V
+        bindings = <&kp LS(_C(V))>;  // cmd+shift+v
+        layers = <0 1 2 3 4 5 6 7 8>;
+    };
+
+    combo_cut {
+        timeout-ms = <COMBO_FIRING_DECAY>;
+        key-positions = <POS_LH_C4R5 POS_LH_C3R5 POS_LH_C2R5>;  // X + C + V
+        bindings = <&kp _C(X)>;  // cmd+x
         layers = <0 1 2 3 4 5 6 7 8>;
     };
 
@@ -1013,15 +1032,8 @@ combos {
 
     combo_redo {
         timeout-ms = <COMBO_FIRING_DECAY>;
-        key-positions = <POS_LH_C6R5 POS_LH_C5R5>;  // LSFT + Z
+        key-positions = <POS_LH_C5R5 POS_LH_C4R5 POS_LH_C3R5>;  // Z + X + C
         bindings = <&kp _REDO>;  // cmd+shift+z
-        layers = <0 1 2 3 4 5 6 7 8>;
-    };
-
-    combo_emoji {
-        timeout-ms = <COMBO_FIRING_DECAY>;
-        key-positions = <POS_RH_C2R4 POS_RH_C4R4>;  // J + L
-        bindings = <&kp LC(LG(SPACE))>;  // ctrl+cmd+space
         layers = <0 1 2 3 4 5 6 7 8>;
     };
 
@@ -1031,7 +1043,7 @@ combos {
     combo_cap_screen_app {
         timeout-ms = <COMBO_FIRING_DECAY>;
         key-positions = <POS_LH_C5R2 POS_LH_C4R2>;  // 1 + 2
-        bindings = <&kp LG(LS(N1))>;  // cmd+shift+1
+        bindings = <&kp _C(LS(N1))>;  // cmd+shift+1
         layers = <0 1 2 3 4 5 6 7 8>;
     };
 
@@ -1039,7 +1051,7 @@ combos {
     combo_cap_screen {
         timeout-ms = <COMBO_FIRING_DECAY>;
         key-positions = <POS_LH_C4R2 POS_LH_C3R2>;  // 2 + 3
-        bindings = <&kp LG(LS(N3))>;  // cmd+shift+3
+        bindings = <&kp _C(LS(N3))>;  // cmd+shift+3
         layers = <0 1 2 3 4 5 6 7 8>;
     };
 
@@ -1047,7 +1059,7 @@ combos {
     combo_cap_window {
         timeout-ms = <COMBO_FIRING_DECAY>;
         key-positions = <POS_LH_C3R2 POS_LH_C2R2>;  // 3 + 4
-        bindings = <&kp LG(LS(N4))>;  // cmd+shift+4
+        bindings = <&kp _C(LS(N4))>;  // cmd+shift+4
         layers = <0 1 2 3 4 5 6 7 8>;
     };
 
@@ -1055,51 +1067,51 @@ combos {
     combo_capture_all {
         timeout-ms = <COMBO_FIRING_DECAY>;
         key-positions = <POS_LH_C4R2 POS_LH_C3R2 POS_LH_C2R2>;  // 2 + 3 + 4
-        bindings = <&kp LG(LS(N5))>;  // cmd+shift+5
+        bindings = <&kp _C(LS(N5))>;  // cmd+shift+5
         layers = <0 1 2 3 4 5 6 7 8>;
     };
 
     combo_loom {
         timeout-ms = <COMBO_FIRING_DECAY>;
         key-positions = <POS_LH_C4R2 POS_LH_C2R2>;  // 2 + 4
-        bindings = <&kp LG(LS(N7))>;  // cmd+shift+7
+        bindings = <&kp _C(LS(N7))>;  // cmd+shift+7
         layers = <0 1 2 3 4 5 6 7 8>;
     };
 
     combo_record_screen {
         timeout-ms = <COMBO_FIRING_DECAY>;
         key-positions = <POS_LH_C3R2 POS_LH_C2R2 POS_LH_C1R2>;  // 3 + 4 + 5
-        bindings = <&kp LG(LS(N8))>;  // cmd+shift+8
+        bindings = <&kp _C(LS(N8))>;  // cmd+shift+8
         layers = <0 1 2 3 4 5 6 7 8>;
     };
 
     // Application Control
 
-    combo_switch_app {
-        timeout-ms = <COMBO_FIRING_DECAY>;
-        key-positions = <POS_LH_C5R3 POS_LH_C4R3>;  // Q + W
-        bindings = <&kp LG(TAB)>;  // cmd+tab
-        layers = <0 1 2 3 4 5 6 7 8>;
-    };
-
     combo_quit_app {
         timeout-ms = <COMBO_FIRING_DECAY>;
         key-positions = <POS_LH_C5R3 POS_LH_C1R3>;  // Q + T
-        bindings = <&kp LG(Q)>;  // cmd+q
+        bindings = <&kp _C(Q)>;  // cmd+q
         layers = <0 1 2 3 4 5 6 7 8>;
     };
 
     combo_close_window {
         timeout-ms = <COMBO_FIRING_DECAY>;
-        key-positions = <POS_LH_C1R3 POS_LH_C4R3>;  // T + W
-        bindings = <&kp LG(W)>;  // cmd+w
+        key-positions = <POS_LH_C4R3 POS_LH_C1R3>;  // W + T
+        bindings = <&kp _C(W)>;  // cmd+w
+        layers = <0 1 2 3 4 5 6 7 8>;
+    };
+
+    combo_refresh {
+        timeout-ms = <COMBO_FIRING_DECAY>;
+        key-positions = <POS_LH_C5R4 POS_LH_C3R3 POS_LH_C2R3>;  // A + D + R
+        bindings = <&kp _C(R)>;  // cmd+r
         layers = <0 1 2 3 4 5 6 7 8>;
     };
 
     combo_new_tab {
         timeout-ms = <COMBO_FIRING_DECAY>;
         key-positions = <POS_LH_C5R4 POS_LH_C1R3>;  // A + T
-        bindings = <&kp LG(T)>;  // cmd+t
+        bindings = <&kp _C(T)>;  // cmd+t
         layers = <0 1 2 3 4 5 6 7 8>;
     };
 
@@ -1117,19 +1129,40 @@ combos {
         layers = <0 1 2 3 4 5 6 7 8>;
     };
 
+    combo_save {
+        timeout-ms = <COMBO_FIRING_FAST>;
+        key-positions = <POS_LH_C5R4 POS_LH_C4R4>;  // A + S
+        bindings = <&kp _C(S)>;  // cmd+s
+        layers = <0 1 2 3 4 5 6 7 8>;
+    };
+
     // Typing
 
     combo_select_all {
         timeout-ms = <COMBO_FIRING_DECAY>;
-        key-positions = <POS_LH_T4 POS_LH_C5R4 POS_RH_C4R4>;  // BACKSPACE + A + S
-        bindings = <&kp LG(A)>;  // cmd+a
+        key-positions = <POS_LH_C5R4 POS_LH_C4R4 POS_LH_C3R4>;  // A + S + D
+        bindings = <&kp _C(A)>;  // cmd+a
+        layers = <0 1 2 3 4 5 6 7 8>;
+    };
+
+    combo_deselect {
+        timeout-ms = <COMBO_FIRING_DECAY>;
+        key-positions = <POS_LH_C5R4 POS_LH_C3R4 POS_LH_C2R4>;  // A + D + F
+        bindings = <&kp _C(LS(A))>;  // cmd+shift+a
+        layers = <0 1 2 3 4 5 6 7 8>;
+    };
+
+    combo_find {
+        timeout-ms = <COMBO_FIRING_FAST>;
+        key-positions = <POS_LH_C5R4 POS_LH_C2R4>;  // A + F
+        bindings = <&kp _C(F)>;  // cmd+f
         layers = <0 1 2 3 4 5 6 7 8>;
     };
 
     combo_backspace_word {
         timeout-ms = <COMBO_FIRING_DECAY>;
-        key-positions = <POS_LH_T4 POS_LH_C5R4>;  // BACKSPACE + A
-        bindings = <&kp LA(BSPC)>;  // opt+backspace
+        key-positions = <POS_LH_T4 POS_LH_C6R4>;
+        bindings = <&kp _W(BSPC)>;  // opt+backspace
         layers = <0 1 2 3 4 5 6 7 8>;
     };
 
@@ -1158,13 +1191,6 @@ combos {
         timeout-ms = <COMBO_FIRING_DECAY>;
         key-positions = <POS_RH_C3R5 POS_RH_C4R5 POS_RH_C5R5>;  // COMMA + DOT + FSLH
         bindings = <&kp RBRC>;  // }
-        layers = <0 1 2 3 4 5 6 7 8>;
-    };
-
-    combo_underscore {
-        timeout-ms = <COMBO_FIRING_DECAY>;
-        key-positions = <POS_RH_C5R3 POS_RH_C6R3>;  // P + MINUS
-        bindings = <&kp UNDER>;  // _
         layers = <0 1 2 3 4 5 6 7 8>;
     };
 
@@ -1242,67 +1268,72 @@ combos {
 
     // SPECIAL COMBOS
 
+    combo_emoji {
+        timeout-ms = <COMBO_FIRING_DECAY>;
+        key-positions = <POS_RH_C2R4 POS_RH_C4R4>;  // J + L
+        bindings = <&kp LC(_C(SPACE))>;  // ctrl+cmd+space
+        layers = <0 1 2 3 4 5 6 7 8>;
+    };
+
     combo_raycast {
         timeout-ms = <COMBO_FIRING_DECAY>;
         key-positions = <POS_RH_C2R4 POS_RH_C3R4>;  // J + K
-        bindings = <&kp LG(SPACE)>;  // cmd+space
+        bindings = <&kp _C(SPACE)>;  // cmd+space
         layers = <0 1 2 3 4 5 6 7 8>;
     };
 
     combo_raycast_ai {
         timeout-ms = <COMBO_FIRING_DECAY>;
-        key-positions = <POS_LH_C3R4 POS_LH_C2R4>;  // D + F
-        bindings = <&kp LA(LG(LS(SPACE)))>;  // opt+cmd+shift+space
+        key-positions = <POS_LH_C2R4 POS_LH_C3R4>;  // D + F
+        bindings = <&kp _MEH(SPACE)>;  // meh+space
+        layers = <0 1 2 3 4 5 6 7 8>;
+    };
+
+    combo_raycast_notes {
+        timeout-ms = <COMBO_FIRING_DECAY>;
+        key-positions = <POS_RH_C2R4 POS_RH_C3R4 POS_RH_C4R4>;  // N + J + K
+        bindings = <&kp _W(N)>;  // opt+n
+        layers = <0 1 2 3 4 5 6 7 8>;
+    };
+
+    combo_chatgpt {
+        timeout-ms = <COMBO_FIRING_DECAY>;
+        key-positions = <POS_LH_C2R4 POS_LH_C3R4 POS_LH_C4R4>;  // S + D + F
+        bindings = <&kp _W(SPACE)>;  // opt+space
         layers = <0 1 2 3 4 5 6 7 8>;
     };
 
     combo_1password {
         timeout-ms = <COMBO_FIRING_DECAY>;
         key-positions = <POS_RH_C3R4 POS_RH_C4R4>;  // K + L
-        bindings = <&kp LG(LS(SPACE))>;  // cmd+shift+space
+        bindings = <&kp _C(LS(SPACE))>;  // cmd+shift+space
         layers = <0 1 2 3 4 5 6 7 8>;
     };
 
     combo_calendar {
         timeout-ms = <COMBO_FIRING_DECAY>;
-        key-positions = <POS_LH_C3R5 POS_RH_C4R4>;  // C + L
-        bindings = <&kp LA(LC(SPACE))>;  // opt+ctrl
+        key-positions = <POS_RH_C4R4 POS_RH_C5R4>;  // L + SEMI
+        bindings = <&kp _W(LC(SPACE))>;  // opt+ctrl
         layers = <0 1 2 3 4 5 6 7 8>;
     };
 
     combo_dictate {
         timeout-ms = <COMBO_FIRING_DECAY>;
-        key-positions = <POS_LH_C4R4 POS_LH_C3R4 POS_LH_C2R4>;  // S + D + F
+        key-positions = <POS_LH_T4 POS_LH_C3R4>;  // LT4 + D
         bindings = <&kp LC(LS(SPACE))>;  // ctrl+shift+space
         layers = <0 1 2 3 4 5 6 7 8>;
     };
 
     combo_homerow {
         timeout-ms = <COMBO_FIRING_DECAY>;
-        key-positions = <POS_RH_C2R4 POS_RH_C3R4 POS_RH_C4R4>;  // J + K + L
-        bindings = <&kp LA(LS(SPACE))>;  // opt+shift+space
+        key-positions = <POS_RH_C1R4 POS_RH_C2R4>;  // J + H
+        bindings = <&kp _W(LS(SPACE))>;  // opt+shift+space
         layers = <0 1 2 3 4 5 6 7 8>;
     };
 
 };
 
 behaviors {
-  
-    //////////////////////////////////////////////////////////////////////////
-    //
-    // MG Custom Key for AeroSpace Control
-    //
-    //////////////////////////////////////////////////////////////////////////
-
-    aero: aerospace {
-        compatible = "zmk,behavior-hold-tap";
-        label = "AEROSPACE";
-        #binding-cells = <2>;
-        tapping-term-ms = <100>;
-        quick-tap-ms = <0>;
-        flavor = "tap-preferred";
-        bindings = <&kp _HYPER>, <&kp _MEH>; // Sends MEH if pressed, HYPER if held
-    };
 
     //////////////////////////////////////////////////////////////////////////
     //
@@ -1544,6 +1575,8 @@ behaviors {
     // NOTE: The "tap-preferred" flavor of ZMK hold-tap for index finger keys
     // allows faster activation of the Shift modifier (without having to wait
     // for the modified key to be released as the "balanced" flavor requires).
+    // Typing streaks and the `hold-trigger-on-release` setting are disabled
+    // for the index fingers so as not to hinder their speed and dexterity.
     //
     #ifndef INDEX_HOLDING_TYPE
     #define INDEX_HOLDING_TYPE "tap-preferred"
@@ -1975,7 +2008,7 @@ behaviors {
         #ifdef SHIFT_FORGIVENESS
         #if LEFT_PINKY_MOD == LSFT || LEFT_PINKY_MOD == RSFT
         hold-while-undecided; // requires 24.08-beta1 or newer firmware
-        retro-tap; // tap on standalone hold
+        retro-tap;
         #endif
         #endif
     };
@@ -1992,7 +2025,7 @@ behaviors {
         #ifdef SHIFT_FORGIVENESS
         #if LEFT_PINKY_MOD == LSFT || LEFT_PINKY_MOD == RSFT
         hold-while-undecided; // requires 24.08-beta1 or newer firmware
-        retro-tap; // tap on standalone hold
+        retro-tap;
         #endif
         #endif
     };
@@ -2073,7 +2106,7 @@ behaviors {
         #ifdef SHIFT_FORGIVENESS
         #if RIGHT_PINKY_MOD == LSFT || RIGHT_PINKY_MOD == RSFT
         hold-while-undecided; // requires 24.08-beta1 or newer firmware
-        retro-tap; // tap on standalone hold
+        retro-tap;
         #endif
         #endif
     };
@@ -2090,7 +2123,7 @@ behaviors {
         #ifdef SHIFT_FORGIVENESS
         #if RIGHT_PINKY_MOD == LSFT || RIGHT_PINKY_MOD == RSFT
         hold-while-undecided; // requires 24.08-beta1 or newer firmware
-        retro-tap; // tap on standalone hold
+        retro-tap;
         #endif
         #endif
     };
@@ -2171,7 +2204,7 @@ behaviors {
         #ifdef SHIFT_FORGIVENESS
         #if LEFT_RING1_MOD == LSFT || LEFT_RING1_MOD == RSFT
         hold-while-undecided; // requires 24.08-beta1 or newer firmware
-        retro-tap; // tap on standalone hold
+        retro-tap;
         #endif
         #endif
     };
@@ -2188,7 +2221,7 @@ behaviors {
         #ifdef SHIFT_FORGIVENESS
         #if LEFT_RING1_MOD == LSFT || LEFT_RING1_MOD == RSFT
         hold-while-undecided; // requires 24.08-beta1 or newer firmware
-        retro-tap; // tap on standalone hold
+        retro-tap;
         #endif
         #endif
     };
@@ -2269,7 +2302,7 @@ behaviors {
         #ifdef SHIFT_FORGIVENESS
         #if RIGHT_RING1_MOD == LSFT || RIGHT_RING1_MOD == RSFT
         hold-while-undecided; // requires 24.08-beta1 or newer firmware
-        retro-tap; // tap on standalone hold
+        retro-tap;
         #endif
         #endif
     };
@@ -2286,7 +2319,7 @@ behaviors {
         #ifdef SHIFT_FORGIVENESS
         #if RIGHT_RING1_MOD == LSFT || RIGHT_RING1_MOD == RSFT
         hold-while-undecided; // requires 24.08-beta1 or newer firmware
-        retro-tap; // tap on standalone hold
+        retro-tap;
         #endif
         #endif
     };
@@ -2367,7 +2400,7 @@ behaviors {
         #ifdef SHIFT_FORGIVENESS
         #if LEFT_RING2_MOD == LSFT || LEFT_RING2_MOD == RSFT
         hold-while-undecided; // requires 24.08-beta1 or newer firmware
-        retro-tap; // tap on standalone hold
+        retro-tap;
         #endif
         #endif
     };
@@ -2384,7 +2417,7 @@ behaviors {
         #ifdef SHIFT_FORGIVENESS
         #if LEFT_RING2_MOD == LSFT || LEFT_RING2_MOD == RSFT
         hold-while-undecided; // requires 24.08-beta1 or newer firmware
-        retro-tap; // tap on standalone hold
+        retro-tap;
         #endif
         #endif
     };
@@ -2465,7 +2498,7 @@ behaviors {
         #ifdef SHIFT_FORGIVENESS
         #if RIGHT_RING2_MOD == LSFT || RIGHT_RING2_MOD == RSFT
         hold-while-undecided; // requires 24.08-beta1 or newer firmware
-        retro-tap; // tap on standalone hold
+        retro-tap;
         #endif
         #endif
     };
@@ -2482,7 +2515,7 @@ behaviors {
         #ifdef SHIFT_FORGIVENESS
         #if RIGHT_RING2_MOD == LSFT || RIGHT_RING2_MOD == RSFT
         hold-while-undecided; // requires 24.08-beta1 or newer firmware
-        retro-tap; // tap on standalone hold
+        retro-tap;
         #endif
         #endif
     };
@@ -2563,7 +2596,7 @@ behaviors {
         #ifdef SHIFT_FORGIVENESS
         #if LEFT_MIDDY_MOD == LSFT || LEFT_MIDDY_MOD == RSFT
         hold-while-undecided; // requires 24.08-beta1 or newer firmware
-        retro-tap; // tap on standalone hold
+        retro-tap;
         #endif
         #endif
     };
@@ -2580,7 +2613,7 @@ behaviors {
         #ifdef SHIFT_FORGIVENESS
         #if LEFT_MIDDY_MOD == LSFT || LEFT_MIDDY_MOD == RSFT
         hold-while-undecided; // requires 24.08-beta1 or newer firmware
-        retro-tap; // tap on standalone hold
+        retro-tap;
         #endif
         #endif
     };
@@ -2661,7 +2694,7 @@ behaviors {
         #ifdef SHIFT_FORGIVENESS
         #if RIGHT_MIDDY_MOD == LSFT || RIGHT_MIDDY_MOD == RSFT
         hold-while-undecided; // requires 24.08-beta1 or newer firmware
-        retro-tap; // tap on standalone hold
+        retro-tap;
         #endif
         #endif
     };
@@ -2678,7 +2711,7 @@ behaviors {
         #ifdef SHIFT_FORGIVENESS
         #if RIGHT_MIDDY_MOD == LSFT || RIGHT_MIDDY_MOD == RSFT
         hold-while-undecided; // requires 24.08-beta1 or newer firmware
-        retro-tap; // tap on standalone hold
+        retro-tap;
         #endif
         #endif
     };
@@ -2759,7 +2792,7 @@ behaviors {
         #ifdef SHIFT_FORGIVENESS
         #if LEFT_INDEX_MOD == LSFT || LEFT_INDEX_MOD == RSFT
         hold-while-undecided; // requires 24.08-beta1 or newer firmware
-        retro-tap; // tap on standalone hold
+        retro-tap;
         #endif
         #endif
     };
@@ -2776,7 +2809,7 @@ behaviors {
         #ifdef SHIFT_FORGIVENESS
         #if LEFT_INDEX_MOD == LSFT || LEFT_INDEX_MOD == RSFT
         hold-while-undecided; // requires 24.08-beta1 or newer firmware
-        retro-tap; // tap on standalone hold
+        retro-tap;
         #endif
         #endif
     };
@@ -2857,7 +2890,7 @@ behaviors {
         #ifdef SHIFT_FORGIVENESS
         #if RIGHT_INDEX_MOD == LSFT || RIGHT_INDEX_MOD == RSFT
         hold-while-undecided; // requires 24.08-beta1 or newer firmware
-        retro-tap; // tap on standalone hold
+        retro-tap;
         #endif
         #endif
     };
@@ -2874,7 +2907,7 @@ behaviors {
         #ifdef SHIFT_FORGIVENESS
         #if RIGHT_INDEX_MOD == LSFT || RIGHT_INDEX_MOD == RSFT
         hold-while-undecided; // requires 24.08-beta1 or newer firmware
-        retro-tap; // tap on standalone hold
+        retro-tap;
         #endif
         #endif
     };
@@ -4574,6 +4607,21 @@ behaviors {
         quick-release;
         ignore-modifiers;
     };
+
+    // MG Raycast Macro
+
+    // raycast_oneshot: raycast_oneshot {
+    //     compatible = "zmk,behavior-macro-one-param";
+    //     wait-ms = <10>;
+    //     tap-ms = <0>;
+    //     #binding-cells = <1>;
+    //     bindings
+    //         = <&macro_param_1to1>
+    //         , <&macro_tap &kp _RAYCAST>
+    //         , <&macro_tap &kp MACRO_PLACEHOLDER>
+    //         , <&macro_tap &kp RETURN>
+    //         ;
+    // };
 
     //////////////////////////////////////////////////////////////////////////
     //

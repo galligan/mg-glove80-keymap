@@ -71,7 +71,7 @@
 #define _FIND       _C(F)
 #define _FIND_NEXT  _C(G)
 #define _FIND_PREV  _C(LS(G))
-#define _MEH        LC(LS(LA))
+#define _MEH        LC(LS(_G_TAB))
 #define _HYPER      _C(_MEH)
 
 //
@@ -913,7 +913,15 @@ combos {
     // after pressing the first key in a ZMK combo to finish the whole chord.
     //
     #ifndef COMBO_FIRING_DECAY
-    #define COMBO_FIRING_DECAY 50
+    #define COMBO_FIRING_DECAY 30
+    #endif
+    #ifdef LAYER_Gaming
+    combo_gaming_layer_toggle {
+        timeout-ms = <COMBO_FIRING_DECAY>;
+        key-positions = <POS_LH_T3 POS_LH_T6>;
+        bindings = <&tog LAYER_Gaming>;
+        layers = <0 LAYER_Gaming>;
+    };
     #endif
     #ifdef _A_TAB
     combo_alt_tab_switcher {
@@ -945,19 +953,19 @@ combos {
         layers = <0 1 2 3 4 5 6 7 8>;
     };
 
-    combo_sticky_1shot_shift_left {
-        timeout-ms = <COMBO_FIRING_DECAY>;
-        key-positions = <POS_LH_T4 POS_LH_C2R4>;
-        bindings = <&sticky_key_oneshot LSFT>;
-        layers = <0 1 2 3 4 5 6 7 8>;
-    };
+    // combo_sticky_1shot_shift_left {
+    //     timeout-ms = <COMBO_FIRING_DECAY>;
+    //     key-positions = <POS_LH_T4 POS_LH_C2R4>;
+    //     bindings = <&sticky_key_oneshot LSFT>;
+    //     layers = <0 1 2 3 4 5 6 7 8>;
+    // };
 
-    combo_sticky_1shot_shift_right {
-        timeout-ms = <COMBO_FIRING_DECAY>;
-        key-positions = <POS_RH_T4 POS_RH_C2R4>;
-        bindings = <&sticky_key_oneshot LSFT>;
-        layers = <0 1 2 3 4 5 6 7 8>;
-    };
+    // combo_sticky_1shot_shift_right {
+    //     timeout-ms = <COMBO_FIRING_DECAY>;
+    //     key-positions = <POS_RH_T4 POS_RH_C2R4>;
+    //     bindings = <&sticky_key_oneshot LSFT>;
+    //     layers = <0 1 2 3 4 5 6 7 8>;
+    // };
 
     combo_caps_word_left {
         timeout-ms = <COMBO_FIRING_DECAY>;
@@ -986,7 +994,7 @@ combos {
     combo_copy_plus {
         timeout-ms = <COMBO_FIRING_DECAY>;
         key-positions = <POS_LH_C5R5 POS_LH_C3R5>;  // Z + C
-        bindings = <&kp LS(LG(C))>;  // cmd+shift+c
+        bindings = <&kp LS(_C(C))>;  // cmd+shift+c
         layers = <0 1 2 3 4 5 6 7 8>;
     };
 
@@ -1000,7 +1008,14 @@ combos {
     combo_paste_plus {
         timeout-ms = <COMBO_FIRING_DECAY>;
         key-positions = <POS_LH_C5R5 POS_LH_C2R5>;  // Z + V
-        bindings = <&kp LS(LG(V))>;  // cmd+shift+v
+        bindings = <&kp LS(_C(V))>;  // cmd+shift+v
+        layers = <0 1 2 3 4 5 6 7 8>;
+    };
+
+    combo_cut {
+        timeout-ms = <COMBO_FIRING_DECAY>;
+        key-positions = <POS_LH_C5R5 POS_LH_C4R5 POS_LH_C3R5>;  // Z + X + C
+        bindings = <&kp _C(X)>;  // cmd+x
         layers = <0 1 2 3 4 5 6 7 8>;
     };
 
@@ -1021,7 +1036,7 @@ combos {
     combo_emoji {
         timeout-ms = <COMBO_FIRING_DECAY>;
         key-positions = <POS_RH_C2R4 POS_RH_C4R4>;  // J + L
-        bindings = <&kp LC(LG(SPACE))>;  // ctrl+cmd+space
+        bindings = <&kp LC(_C(SPACE))>;  // ctrl+cmd+space
         layers = <0 1 2 3 4 5 6 7 8>;
     };
 
@@ -1031,7 +1046,7 @@ combos {
     combo_cap_screen_app {
         timeout-ms = <COMBO_FIRING_DECAY>;
         key-positions = <POS_LH_C5R2 POS_LH_C4R2>;  // 1 + 2
-        bindings = <&kp LG(LS(N1))>;  // cmd+shift+1
+        bindings = <&kp _C(LS(N1))>;  // cmd+shift+1
         layers = <0 1 2 3 4 5 6 7 8>;
     };
 
@@ -1039,7 +1054,7 @@ combos {
     combo_cap_screen {
         timeout-ms = <COMBO_FIRING_DECAY>;
         key-positions = <POS_LH_C4R2 POS_LH_C3R2>;  // 2 + 3
-        bindings = <&kp LG(LS(N3))>;  // cmd+shift+3
+        bindings = <&kp _C(LS(N3))>;  // cmd+shift+3
         layers = <0 1 2 3 4 5 6 7 8>;
     };
 
@@ -1047,7 +1062,7 @@ combos {
     combo_cap_window {
         timeout-ms = <COMBO_FIRING_DECAY>;
         key-positions = <POS_LH_C3R2 POS_LH_C2R2>;  // 3 + 4
-        bindings = <&kp LG(LS(N4))>;  // cmd+shift+4
+        bindings = <&kp _C(LS(N4))>;  // cmd+shift+4
         layers = <0 1 2 3 4 5 6 7 8>;
     };
 
@@ -1055,51 +1070,51 @@ combos {
     combo_capture_all {
         timeout-ms = <COMBO_FIRING_DECAY>;
         key-positions = <POS_LH_C4R2 POS_LH_C3R2 POS_LH_C2R2>;  // 2 + 3 + 4
-        bindings = <&kp LG(LS(N5))>;  // cmd+shift+5
+        bindings = <&kp _C(LS(N5))>;  // cmd+shift+5
         layers = <0 1 2 3 4 5 6 7 8>;
     };
 
     combo_loom {
         timeout-ms = <COMBO_FIRING_DECAY>;
         key-positions = <POS_LH_C4R2 POS_LH_C2R2>;  // 2 + 4
-        bindings = <&kp LG(LS(N7))>;  // cmd+shift+7
+        bindings = <&kp _C(LS(N7))>;  // cmd+shift+7
         layers = <0 1 2 3 4 5 6 7 8>;
     };
 
     combo_record_screen {
         timeout-ms = <COMBO_FIRING_DECAY>;
         key-positions = <POS_LH_C3R2 POS_LH_C2R2 POS_LH_C1R2>;  // 3 + 4 + 5
-        bindings = <&kp LG(LS(N8))>;  // cmd+shift+8
+        bindings = <&kp _C(LS(N8))>;  // cmd+shift+8
         layers = <0 1 2 3 4 5 6 7 8>;
     };
 
     // Application Control
 
-    combo_switch_app {
-        timeout-ms = <COMBO_FIRING_DECAY>;
-        key-positions = <POS_LH_C5R3 POS_LH_C4R3>;  // Q + W
-        bindings = <&kp LG(TAB)>;  // cmd+tab
-        layers = <0 1 2 3 4 5 6 7 8>;
-    };
-
     combo_quit_app {
         timeout-ms = <COMBO_FIRING_DECAY>;
         key-positions = <POS_LH_C5R3 POS_LH_C1R3>;  // Q + T
-        bindings = <&kp LG(Q)>;  // cmd+q
+        bindings = <&kp _C(Q)>;  // cmd+q
         layers = <0 1 2 3 4 5 6 7 8>;
     };
 
     combo_close_window {
         timeout-ms = <COMBO_FIRING_DECAY>;
-        key-positions = <POS_LH_C1R3 POS_LH_C4R3>;  // T + W
-        bindings = <&kp LG(W)>;  // cmd+w
+        key-positions = <POS_LH_C5R4 POS_LH_C4R3>;  // A + W
+        bindings = <&kp _C(W)>;  // cmd+w
+        layers = <0 1 2 3 4 5 6 7 8>;
+    };
+
+    combo_refresh {
+        timeout-ms = <COMBO_FIRING_DECAY>;
+        key-positions = <POS_LH_C5R4 POS_LH_C2R3>;  // A + R
+        bindings = <&kp _C(R)>;  // cmd+r
         layers = <0 1 2 3 4 5 6 7 8>;
     };
 
     combo_new_tab {
         timeout-ms = <COMBO_FIRING_DECAY>;
         key-positions = <POS_LH_C5R4 POS_LH_C1R3>;  // A + T
-        bindings = <&kp LG(T)>;  // cmd+t
+        bindings = <&kp _C(T)>;  // cmd+t
         layers = <0 1 2 3 4 5 6 7 8>;
     };
 
@@ -1117,19 +1132,40 @@ combos {
         layers = <0 1 2 3 4 5 6 7 8>;
     };
 
+    combo_save {
+        timeout-ms = <COMBO_FIRING_DECAY>;
+        key-positions = <POS_LH_C5R4 POS_LH_C4R4>;  // A + S
+        bindings = <&kp _C(S)>;  // cmd+s
+        layers = <0 1 2 3 4 5 6 7 8>;
+    };
+
     // Typing
 
     combo_select_all {
         timeout-ms = <COMBO_FIRING_DECAY>;
-        key-positions = <POS_LH_T4 POS_LH_C5R4 POS_RH_C4R4>;  // BACKSPACE + A + S
-        bindings = <&kp LG(A)>;  // cmd+a
+        key-positions = <POS_LH_C5R4 POS_LH_C4R4 POS_LH_C3R4>;  // A + S + D
+        bindings = <&kp _C(A)>;  // cmd+a
+        layers = <0 1 2 3 4 5 6 7 8>;
+    };
+
+    combo_deselect {
+        timeout-ms = <COMBO_FIRING_DECAY>;
+        key-positions = <POS_LH_C5R4 POS_LH_C3R4>;  // A + D
+        bindings = <&kp _C(D)>;  // cmd+d
+        layers = <0 1 2 3 4 5 6 7 8>;
+    };
+
+    combo_find {
+        timeout-ms = <COMBO_FIRING_DECAY>;
+        key-positions = <POS_LH_C5R4 POS_LH_C2R4>;  // A + F
+        bindings = <&kp _C(F)>;  // cmd+f
         layers = <0 1 2 3 4 5 6 7 8>;
     };
 
     combo_backspace_word {
         timeout-ms = <COMBO_FIRING_DECAY>;
-        key-positions = <POS_LH_T4 POS_LH_C5R4>;  // BACKSPACE + A
-        bindings = <&kp LA(BSPC)>;  // opt+backspace
+        key-positions = <POS_LH_T4 POS_LH_C6R4>;
+        bindings = <&kp _W(BSPC)>;  // opt+backspace
         layers = <0 1 2 3 4 5 6 7 8>;
     };
 
@@ -1244,65 +1280,208 @@ combos {
 
     combo_raycast {
         timeout-ms = <COMBO_FIRING_DECAY>;
-        key-positions = <POS_RH_C2R4 POS_RH_C3R4>;  // J + K
-        bindings = <&kp LG(SPACE)>;  // cmd+space
+        key-positions = <POS_RH_T4 POS_RH_C2R4>;  // RT4 + J
+        bindings = <&kp _C(SPACE)>;  // cmd+space
         layers = <0 1 2 3 4 5 6 7 8>;
     };
 
     combo_raycast_ai {
         timeout-ms = <COMBO_FIRING_DECAY>;
-        key-positions = <POS_LH_C3R4 POS_LH_C2R4>;  // D + F
-        bindings = <&kp LA(LG(LS(SPACE)))>;  // opt+cmd+shift+space
+        key-positions = <POS_LH_T4 POS_LH_C2R4>;  // LT4 + F
+        bindings = <&kp _MEH(SPACE)>;  // meh+space
+        layers = <0 1 2 3 4 5 6 7 8>;
+    };
+
+    combo_raycast_notes {
+        timeout-ms = <COMBO_FIRING_DECAY>;
+        key-positions = <POS_RH_T4 POS_RH_C1R4>;  // RT4 + N
+        bindings = <&kp _W(N)>;  // opt+n
+        layers = <0 1 2 3 4 5 6 7 8>;
+    };
+
+    combo_reminder {
+        timeout-ms = <COMBO_FIRING_DECAY>;
+        key-positions = <POS_LH_T4 POS_LH_C2R3>;  // LT4 + R
+        bindings = <&kp LC(SPACE)>;  // opt+r
+        layers = <0 1 2 3 4 5 6 7 8>;
+    };
+
+    combo_chatgpt {
+        timeout-ms = <COMBO_FIRING_DECAY>;
+        key-positions = <POS_LH_T4 POS_LH_C1R4>;  // LT4 + G
+        bindings = <&kp _W(SPACE)>;  // opt+space
         layers = <0 1 2 3 4 5 6 7 8>;
     };
 
     combo_1password {
         timeout-ms = <COMBO_FIRING_DECAY>;
-        key-positions = <POS_RH_C3R4 POS_RH_C4R4>;  // K + L
-        bindings = <&kp LG(LS(SPACE))>;  // cmd+shift+space
+        key-positions = <POS_RH_T4 POS_RH_C3R4>;  // RT4 + K
+        bindings = <&kp _C(LS(SPACE))>;  // cmd+shift+space
         layers = <0 1 2 3 4 5 6 7 8>;
     };
 
     combo_calendar {
         timeout-ms = <COMBO_FIRING_DECAY>;
-        key-positions = <POS_LH_C3R5 POS_RH_C4R4>;  // C + L
-        bindings = <&kp LA(LC(SPACE))>;  // opt+ctrl
+        key-positions = <POS_RH_T4 POS_RH_C4R4>;  // RT4 + L
+        bindings = <&kp _W(LC(SPACE))>;  // opt+ctrl
         layers = <0 1 2 3 4 5 6 7 8>;
     };
 
     combo_dictate {
         timeout-ms = <COMBO_FIRING_DECAY>;
-        key-positions = <POS_LH_C4R4 POS_LH_C3R4 POS_LH_C2R4>;  // S + D + F
+        key-positions = <POS_LH_T4 POS_LH_C3R4>;  // LT4 + D
         bindings = <&kp LC(LS(SPACE))>;  // ctrl+shift+space
         layers = <0 1 2 3 4 5 6 7 8>;
     };
 
     combo_homerow {
         timeout-ms = <COMBO_FIRING_DECAY>;
-        key-positions = <POS_RH_C2R4 POS_RH_C3R4 POS_RH_C4R4>;  // J + K + L
-        bindings = <&kp LA(LS(SPACE))>;  // opt+shift+space
+        key-positions = <POS_RH_T4 POS_RH_C1R4>;  // RT4 + H
+        bindings = <&kp _W(LS(SPACE))>;  // opt+shift+space
         layers = <0 1 2 3 4 5 6 7 8>;
     };
 
 };
 
 behaviors {
-  
+
     //////////////////////////////////////////////////////////////////////////
     //
     // MG Custom Key for AeroSpace Control
     //
     //////////////////////////////////////////////////////////////////////////
 
-    aero: aerospace {
-        compatible = "zmk,behavior-hold-tap";
-        label = "AEROSPACE";
-        #binding-cells = <2>;
-        tapping-term-ms = <100>;
-        quick-tap-ms = <0>;
-        flavor = "tap-preferred";
-        bindings = <&kp _HYPER>, <&kp _MEH>; // Sends MEH if pressed, HYPER if held
-    };
+    // #define _AERO_MAIN _MEH
+    // #define _AERO_SECONDARY _HYPER
+    // #define _AERO_HOLD 100
+
+    // aero: aerospace {
+    //     compatible = "zmk,behavior-hold-tap";
+    //     label = "AEROSPACE HOTKEY";
+    //     flavor = "tap-preferred";
+    //     #binding-cells = <2>;
+    //     tapping-term-ms = <_AERO_HOLD>;
+    //     quick-tap-ms = <0>;
+    //     bindings = <&kp>, <&kp>;
+    // };
+
+    // aero: aerospace {
+    //     compatible = "zmk,behavior-hold-tap";
+    //     label = "AEROSPACE";
+    //     flavor = "tap-preferred";
+    //     #binding-cells = <2>;
+    //     tapping-term-ms = <_AERO_HOLD>;
+    //     quick-tap-ms = <0>;
+    //     bindings = <&kp>, <&kp>;
+    // };
+
+    // // Numbers
+    // #define aero_N1 &aero LG(LC(LS(LA(N1)))) LC(LS(LA(N1)))
+    // #define aero_N2 &aero LG(LC(LS(LA(N2)))) LC(LS(LA(N2)))
+    // #define aero_N3 &aero LG(LC(LS(LA(N3)))) LC(LS(LA(N3)))
+    // #define aero_N4 &aero LG(LC(LS(LA(N4)))) LC(LS(LA(N4)))
+    // #define aero_N5 &aero LG(LC(LS(LA(N5)))) LC(LS(LA(N5)))
+    // #define aero_N6 &aero LG(LC(LS(LA(N6)))) LC(LS(LA(N6)))
+    // #define aero_N7 &aero LG(LC(LS(LA(N7)))) LC(LS(LA(N7)))
+    // #define aero_N8 &aero LG(LC(LS(LA(N8)))) LC(LS(LA(N8)))
+    // #define aero_N9 &aero LG(LC(LS(LA(N9)))) LC(LS(LA(N9)))
+    // #define aero_N0 &aero LG(LC(LS(LA(N0)))) LC(LS(LA(N0)))
+
+    // // Letters
+    // #define aero_A &aero LG(LC(LS(LA(A)))) LC(LS(LA(A)))
+    // #define aero_B &aero LG(LC(LS(LA(B)))) LC(LS(LA(B)))
+    // #define aero_C &aero LG(LC(LS(LA(C)))) LC(LS(LA(C)))
+    // #define aero_D &aero LG(LC(LS(LA(D)))) LC(LS(LA(D)))
+    // #define aero_E &aero LG(LC(LS(LA(E)))) LC(LS(LA(E)))
+    // #define aero_F &aero LG(LC(LS(LA(F)))) LC(LS(LA(F)))
+    // #define aero_G &aero LG(LC(LS(LA(G)))) LC(LS(LA(G)))
+    // #define aero_H &aero LG(LC(LS(LA(H)))) LC(LS(LA(H)))
+    // #define aero_I &aero LG(LC(LS(LA(I)))) LC(LS(LA(I)))
+    // #define aero_J &aero LG(LC(LS(LA(J)))) LC(LS(LA(J)))
+    // #define aero_K &aero LG(LC(LS(LA(K)))) LC(LS(LA(K)))
+    // #define aero_L &aero LG(LC(LS(LA(L)))) LC(LS(LA(L)))
+    // #define aero_M &aero LG(LC(LS(LA(M)))) LC(LS(LA(M)))
+    // #define aero_N &aero LG(LC(LS(LA(N)))) LC(LS(LA(N)))
+    // #define aero_O &aero LG(LC(LS(LA(O)))) LC(LS(LA(O)))
+    // #define aero_P &aero LG(LC(LS(LA(P)))) LC(LS(LA(P)))
+    // #define aero_Q &aero LG(LC(LS(LA(Q)))) LC(LS(LA(Q)))
+    // #define aero_R &aero LG(LC(LS(LA(R)))) LC(LS(LA(R)))
+    // #define aero_S &aero LG(LC(LS(LA(S)))) LC(LS(LA(S)))
+    // #define aero_T &aero LG(LC(LS(LA(T)))) LC(LS(LA(T)))
+    // #define aero_U &aero LG(LC(LS(LA(U)))) LC(LS(LA(U)))
+    // #define aero_V &aero LG(LC(LS(LA(V)))) LC(LS(LA(V)))
+    // #define aero_W &aero LG(LC(LS(LA(W)))) LC(LS(LA(W)))
+    // #define aero_X &aero LG(LC(LS(LA(X)))) LC(LS(LA(X)))
+    // #define aero_Y &aero LG(LC(LS(LA(Y)))) LC(LS(LA(Y)))
+    // #define aero_Z &aero LG(LC(LS(LA(Z)))) LC(LS(LA(Z)))
+
+    // // Special keys
+    // #define aero_MINUS &aero LG(LC(LS(LA(MINUS)))) LC(LS(LA(MINUS)))
+    // #define aero_EQUAL &aero LG(LC(LS(LA(EQUAL)))) LC(LS(LA(EQUAL)))
+    // #define aero_DOT &aero LG(LC(LS(LA(DOT)))) LC(LS(LA(DOT)))
+    // #define aero_COMMA &aero LG(LC(LS(LA(COMMA)))) LC(LS(LA(COMMA)))
+    // #define aero_FSLH &aero LG(LC(LS(LA(FSLH)))) LC(LS(LA(FSLH)))
+    // #define aero_BSLH &aero LG(LC(LS(LA(BSLH)))) LC(LS(LA(BSLH)))
+    // #define aero_SQT &aero LG(LC(LS(LA(SQT)))) LC(LS(LA(SQT)))
+    // #define aero_SEMI &aero LG(LC(LS(LA(SEMI)))) LC(LS(LA(SEMI)))
+    // #define aero_GRAVE &aero LG(LC(LS(LA(GRAVE)))) LC(LS(LA(GRAVE)))
+    // #define aero_LBKT &aero LG(LC(LS(LA(LBKT)))) LC(LS(LA(LBKT)))
+    // #define aero_RBKT &aero LG(LC(LS(LA(RBKT)))) LC(LS(LA(RBKT)))
+    // #define aero_SPACE &aero LG(LC(LS(LA(SPACE)))) LC(LS(LA(SPACE)))
+    // #define aero_RET &aero LG(LC(LS(LA(RET)))) LC(LS(LA(RET)))
+    // #define aero_ESC &aero LG(LC(LS(LA(ESC)))) LC(LS(LA(ESC)))
+    // #define aero_BSPC &aero LG(LC(LS(LA(BSPC)))) LC(LS(LA(BSPC)))
+    // #define aero_TAB &aero LG(LC(LS(LA(TAB)))) LC(LS(LA(TAB)))
+
+    // // Function keys
+    // #define aero_F1 &aero LG(LC(LS(LA(F1)))) LC(LS(LA(F1)))
+    // #define aero_F2 &aero LG(LC(LS(LA(F2)))) LC(LS(LA(F2)))
+    // #define aero_F3 &aero LG(LC(LS(LA(F3)))) LC(LS(LA(F3)))
+    // #define aero_F4 &aero LG(LC(LS(LA(F4)))) LC(LS(LA(F4)))
+    // #define aero_F5 &aero LG(LC(LS(LA(F5)))) LC(LS(LA(F5)))
+    // #define aero_F6 &aero LG(LC(LS(LA(F6)))) LC(LS(LA(F6)))
+    // #define aero_F7 &aero LG(LC(LS(LA(F7)))) LC(LS(LA(F7)))
+    // #define aero_F8 &aero LG(LC(LS(LA(F8)))) LC(LS(LA(F8)))
+    // #define aero_F9 &aero LG(LC(LS(LA(F9)))) LC(LS(LA(F9)))
+    // #define aero_F10 &aero LG(LC(LS(LA(F10)))) LC(LS(LA(F10)))
+    // #define aero_F11 &aero LG(LC(LS(LA(F11)))) LC(LS(LA(F11)))
+    // #define aero_F12 &aero LG(LC(LS(LA(F12)))) LC(LS(LA(F12)))
+    // #define aero_F13 &aero LG(LC(LS(LA(F13)))) LC(LS(LA(F13)))
+    // #define aero_F14 &aero LG(LC(LS(LA(F14)))) LC(LS(LA(F14)))
+    // #define aero_F15 &aero LG(LC(LS(LA(F15)))) LC(LS(LA(F15))))
+    // #define aero_F16 &aero LG(LC(LS(LA(F16)))) LC(LS(LA(F16))))
+    // #define aero_F17 &aero LG(LC(LS(LA(F17)))) LC(LS(LA(F17))))
+    // #define aero_F18 &aero LG(LC(LS(LA(F18)))) LC(LS(LA(F18))))
+    // #define aero_F19 &aero LG(LC(LS(LA(F19)))) LC(LS(LA(F19))))
+    // #define aero_F20 &aero LG(LC(LS(LA(F20)))) LC(LS(LA(F20))))
+
+    // // Arrows
+    // #define aero_LEFT &aero LG(LC(LS(LA(LEFT)))) LC(LS(LA(LEFT))))
+    // #define aero_DOWN &aero LG(LC(LS(LA(DOWN)))) LC(LS(LA(DOWN))))
+    // #define aero_UP &aero LG(LC(LS(LA(UP)))) LC(LS(LA(UP))))
+    // #define aero_RIGHT &aero LG(LC(LS(LA(RIGHT)))) LC(LS(LA(RIGHT))))
+
+    // // Keypad numbers
+    // #define aero_KP_N0 &aero LG(LC(LS(LA(KP_N0)))) LC(LS(LA(KP_N0))))
+    // #define aero_KP_N1 &aero LG(LC(LS(LA(KP_N1)))) LC(LS(LA(KP_N1))))
+    // #define aero_KP_N2 &aero LG(LC(LS(LA(KP_N2)))) LC(LS(LA(KP_N2))))
+    // #define aero_KP_N3 &aero LG(LC(LS(LA(KP_N3)))) LC(LS(LA(KP_N3))))
+    // #define aero_KP_N4 &aero LG(LC(LS(LA(KP_N4)))) LC(LS(LA(KP_N4))))
+    // #define aero_KP_N5 &aero LG(LC(LS(LA(KP_N5)))) LC(LS(LA(KP_N5))))
+    // #define aero_KP_N6 &aero LG(LC(LS(LA(KP_N6)))) LC(LS(LA(KP_N6))))
+    // #define aero_KP_N7 &aero LG(LC(LS(LA(KP_N7)))) LC(LS(LA(KP_N7))))
+    // #define aero_KP_N8 &aero LG(LC(LS(LA(KP_N8)))) LC(LS(LA(KP_N8))))
+    // #define aero_KP_N9 &aero LG(LC(LS(LA(KP_N9)))) LC(LS(LA(KP_N9))))
+
+    // // Keypad special
+    // #define aero_KP_CLEAR &aero LG(LC(LS(LA(KP_CLEAR)))) LC(LS(LA(KP_CLEAR))))
+    // #define aero_KP_DOT &aero LG(LC(LS(LA(KP_DOT)))) LC(LS(LA(KP_DOT))))
+    // #define aero_KP_DIVIDE &aero LG(LC(LS(LA(KP_DIVIDE)))) LC(LS(LA(KP_DIVIDE))))
+    // #define aero_KP_ENTER &aero LG(LC(LS(LA(KP_ENTER)))) LC(LS(LA(KP_ENTER))))
+    // #define aero_KP_EQUAL &aero LG(LC(LS(LA(KP_EQUAL)))) LC(LS(LA(KP_EQUAL))))
+    // #define aero_KP_MINUS &aero LG(LC(LS(LA(KP_MINUS)))) LC(LS(LA(KP_MINUS))))
+    // #define aero_KP_MULTIPLY &aero LG(LC(LS(LA(KP_MULTIPLY)))) LC(LS(LA(KP_MULTIPLY))))
+    // #define aero_KP_PLUS &aero LG(LC(LS(LA(KP_PLUS)))) LC(LS(LA(KP_PLUS))))
 
     //////////////////////////////////////////////////////////////////////////
     //
@@ -1544,6 +1723,8 @@ behaviors {
     // NOTE: The "tap-preferred" flavor of ZMK hold-tap for index finger keys
     // allows faster activation of the Shift modifier (without having to wait
     // for the modified key to be released as the "balanced" flavor requires).
+    // Typing streaks and the `hold-trigger-on-release` setting are disabled
+    // for the index fingers so as not to hinder their speed and dexterity.
     //
     #ifndef INDEX_HOLDING_TYPE
     #define INDEX_HOLDING_TYPE "tap-preferred"
@@ -1975,7 +2156,7 @@ behaviors {
         #ifdef SHIFT_FORGIVENESS
         #if LEFT_PINKY_MOD == LSFT || LEFT_PINKY_MOD == RSFT
         hold-while-undecided; // requires 24.08-beta1 or newer firmware
-        retro-tap; // tap on standalone hold
+        retro-tap;
         #endif
         #endif
     };
@@ -1992,7 +2173,7 @@ behaviors {
         #ifdef SHIFT_FORGIVENESS
         #if LEFT_PINKY_MOD == LSFT || LEFT_PINKY_MOD == RSFT
         hold-while-undecided; // requires 24.08-beta1 or newer firmware
-        retro-tap; // tap on standalone hold
+        retro-tap;
         #endif
         #endif
     };
@@ -2073,7 +2254,7 @@ behaviors {
         #ifdef SHIFT_FORGIVENESS
         #if RIGHT_PINKY_MOD == LSFT || RIGHT_PINKY_MOD == RSFT
         hold-while-undecided; // requires 24.08-beta1 or newer firmware
-        retro-tap; // tap on standalone hold
+        retro-tap;
         #endif
         #endif
     };
@@ -2090,7 +2271,7 @@ behaviors {
         #ifdef SHIFT_FORGIVENESS
         #if RIGHT_PINKY_MOD == LSFT || RIGHT_PINKY_MOD == RSFT
         hold-while-undecided; // requires 24.08-beta1 or newer firmware
-        retro-tap; // tap on standalone hold
+        retro-tap;
         #endif
         #endif
     };
@@ -2171,7 +2352,7 @@ behaviors {
         #ifdef SHIFT_FORGIVENESS
         #if LEFT_RING1_MOD == LSFT || LEFT_RING1_MOD == RSFT
         hold-while-undecided; // requires 24.08-beta1 or newer firmware
-        retro-tap; // tap on standalone hold
+        retro-tap;
         #endif
         #endif
     };
@@ -2188,7 +2369,7 @@ behaviors {
         #ifdef SHIFT_FORGIVENESS
         #if LEFT_RING1_MOD == LSFT || LEFT_RING1_MOD == RSFT
         hold-while-undecided; // requires 24.08-beta1 or newer firmware
-        retro-tap; // tap on standalone hold
+        retro-tap;
         #endif
         #endif
     };
@@ -2269,7 +2450,7 @@ behaviors {
         #ifdef SHIFT_FORGIVENESS
         #if RIGHT_RING1_MOD == LSFT || RIGHT_RING1_MOD == RSFT
         hold-while-undecided; // requires 24.08-beta1 or newer firmware
-        retro-tap; // tap on standalone hold
+        retro-tap;
         #endif
         #endif
     };
@@ -2286,7 +2467,7 @@ behaviors {
         #ifdef SHIFT_FORGIVENESS
         #if RIGHT_RING1_MOD == LSFT || RIGHT_RING1_MOD == RSFT
         hold-while-undecided; // requires 24.08-beta1 or newer firmware
-        retro-tap; // tap on standalone hold
+        retro-tap;
         #endif
         #endif
     };
@@ -2367,7 +2548,7 @@ behaviors {
         #ifdef SHIFT_FORGIVENESS
         #if LEFT_RING2_MOD == LSFT || LEFT_RING2_MOD == RSFT
         hold-while-undecided; // requires 24.08-beta1 or newer firmware
-        retro-tap; // tap on standalone hold
+        retro-tap;
         #endif
         #endif
     };
@@ -2384,7 +2565,7 @@ behaviors {
         #ifdef SHIFT_FORGIVENESS
         #if LEFT_RING2_MOD == LSFT || LEFT_RING2_MOD == RSFT
         hold-while-undecided; // requires 24.08-beta1 or newer firmware
-        retro-tap; // tap on standalone hold
+        retro-tap;
         #endif
         #endif
     };
@@ -2465,7 +2646,7 @@ behaviors {
         #ifdef SHIFT_FORGIVENESS
         #if RIGHT_RING2_MOD == LSFT || RIGHT_RING2_MOD == RSFT
         hold-while-undecided; // requires 24.08-beta1 or newer firmware
-        retro-tap; // tap on standalone hold
+        retro-tap;
         #endif
         #endif
     };
@@ -2482,7 +2663,7 @@ behaviors {
         #ifdef SHIFT_FORGIVENESS
         #if RIGHT_RING2_MOD == LSFT || RIGHT_RING2_MOD == RSFT
         hold-while-undecided; // requires 24.08-beta1 or newer firmware
-        retro-tap; // tap on standalone hold
+        retro-tap;
         #endif
         #endif
     };
@@ -2563,7 +2744,7 @@ behaviors {
         #ifdef SHIFT_FORGIVENESS
         #if LEFT_MIDDY_MOD == LSFT || LEFT_MIDDY_MOD == RSFT
         hold-while-undecided; // requires 24.08-beta1 or newer firmware
-        retro-tap; // tap on standalone hold
+        retro-tap;
         #endif
         #endif
     };
@@ -2580,7 +2761,7 @@ behaviors {
         #ifdef SHIFT_FORGIVENESS
         #if LEFT_MIDDY_MOD == LSFT || LEFT_MIDDY_MOD == RSFT
         hold-while-undecided; // requires 24.08-beta1 or newer firmware
-        retro-tap; // tap on standalone hold
+        retro-tap;
         #endif
         #endif
     };
@@ -2661,7 +2842,7 @@ behaviors {
         #ifdef SHIFT_FORGIVENESS
         #if RIGHT_MIDDY_MOD == LSFT || RIGHT_MIDDY_MOD == RSFT
         hold-while-undecided; // requires 24.08-beta1 or newer firmware
-        retro-tap; // tap on standalone hold
+        retro-tap;
         #endif
         #endif
     };
@@ -2678,7 +2859,7 @@ behaviors {
         #ifdef SHIFT_FORGIVENESS
         #if RIGHT_MIDDY_MOD == LSFT || RIGHT_MIDDY_MOD == RSFT
         hold-while-undecided; // requires 24.08-beta1 or newer firmware
-        retro-tap; // tap on standalone hold
+        retro-tap;
         #endif
         #endif
     };
@@ -2759,7 +2940,7 @@ behaviors {
         #ifdef SHIFT_FORGIVENESS
         #if LEFT_INDEX_MOD == LSFT || LEFT_INDEX_MOD == RSFT
         hold-while-undecided; // requires 24.08-beta1 or newer firmware
-        retro-tap; // tap on standalone hold
+        retro-tap;
         #endif
         #endif
     };
@@ -2776,7 +2957,7 @@ behaviors {
         #ifdef SHIFT_FORGIVENESS
         #if LEFT_INDEX_MOD == LSFT || LEFT_INDEX_MOD == RSFT
         hold-while-undecided; // requires 24.08-beta1 or newer firmware
-        retro-tap; // tap on standalone hold
+        retro-tap;
         #endif
         #endif
     };
@@ -2857,7 +3038,7 @@ behaviors {
         #ifdef SHIFT_FORGIVENESS
         #if RIGHT_INDEX_MOD == LSFT || RIGHT_INDEX_MOD == RSFT
         hold-while-undecided; // requires 24.08-beta1 or newer firmware
-        retro-tap; // tap on standalone hold
+        retro-tap;
         #endif
         #endif
     };
@@ -2874,7 +3055,7 @@ behaviors {
         #ifdef SHIFT_FORGIVENESS
         #if RIGHT_INDEX_MOD == LSFT || RIGHT_INDEX_MOD == RSFT
         hold-while-undecided; // requires 24.08-beta1 or newer firmware
-        retro-tap; // tap on standalone hold
+        retro-tap;
         #endif
         #endif
     };
