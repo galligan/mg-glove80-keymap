@@ -73,7 +73,7 @@
 #define _FIND_PREV  _C(LS(G))
 #define _MEH        LC(LS(LALT))
 #define _HYPER      _C(_MEH)
-#define _RAYCAST    _C(SPACE)
+// #define _RAYCAST    _C(SPACE)
 
 //
 // USE_NUMPAD_KEYCODES puts `KP_*` keycodes into the Number layer.
@@ -1278,7 +1278,7 @@ combos {
     combo_raycast {
         timeout-ms = <COMBO_FIRING_DECAY>;
         key-positions = <POS_RH_C2R4 POS_RH_C3R4>;  // J + K
-        bindings = <&kp _RAYCAST>;  // cmd+space
+        bindings = <&kp _C(SPACE)>;  // cmd+space
         layers = <0 1 2 3 4 5 6 7 8>;
     };
 
@@ -4409,6 +4409,14 @@ behaviors {
         #binding-cells = <2>;
         bindings = <&mo>, <&kp>;
     };
+    thumb_mod: thumb_mod_tap {
+        compatible = "zmk,behavior-hold-tap";
+        flavor = THUMB_HOLDING_TYPE;
+        tapping-term-ms = <THUMB_HOLDING_TIME>;
+        quick-tap-ms = <THUMB_REPEAT_DECAY>; // enable repeat
+        #binding-cells = <2>;
+        bindings = <&kp>, <&kp>;
+    };
     thumb_parang_left: thumb_layer_access_parang_left {
         compatible = "zmk,behavior-hold-tap";
         flavor = THUMB_HOLDING_TYPE;
@@ -4608,20 +4616,20 @@ behaviors {
         ignore-modifiers;
     };
 
-    MG Raycast Macro
+    // MG Raycast Macro
 
-    raycast_oneshot: raycast_oneshot {
-        compatible = "zmk,behavior-macro-one-param";
-        wait-ms = <10>;
-        tap-ms = <0>;
-        #binding-cells = <1>;
-        bindings
-            = <&macro_param_1to1>
-            , <&macro_tap &kp _RAYCAST>
-            , <&macro_tap &kp MACRO_PLACEHOLDER>
-            , <&macro_tap &kp RETURN>
-            ;
-    };
+    // raycast_oneshot: raycast_oneshot {
+    //     compatible = "zmk,behavior-macro-one-param";
+    //     wait-ms = <10>;
+    //     tap-ms = <0>;
+    //     #binding-cells = <1>;
+    //     bindings
+    //         = <&macro_param_1to1>
+    //         , <&macro_tap &kp _RAYCAST>
+    //         , <&macro_tap &kp MACRO_PLACEHOLDER>
+    //         , <&macro_tap &kp RETURN>
+    //         ;
+    // };
 
     //////////////////////////////////////////////////////////////////////////
     //
