@@ -73,7 +73,7 @@
 #define _FIND_PREV  _C(LS(G))
 #define _MEH        LC(LS(LALT))
 #define _HYPER      _C(_MEH)
-// #define _RAYCAST    _C(SPACE)
+#define _RAYCAST    _C(SPACE)
 
 //
 // USE_NUMPAD_KEYCODES puts `KP_*` keycodes into the Number layer.
@@ -988,6 +988,13 @@ combos {
     // MG COMBOS
 
     // OS Control
+    combo_sleep {
+        timeout-ms = <COMBO_FIRING_DECAY>;
+        key-positions = <POS_LH_C6R1 POS_LH_C5R1>;
+        bindings = <&kp C_SLEEP>;
+        layers = <0 1 2 3 4 5 6 7 8>;
+    };
+
     combo_copy {
         timeout-ms = <COMBO_FIRING_DECAY>;
         key-positions = <POS_LH_C4R5 POS_LH_C3R5>;  // X + C
@@ -1062,6 +1069,14 @@ combos {
         bindings = <&kp _C(LS(N4))>;  // cmd+shift+4
         layers = <0 1 2 3 4 5 6 7 8>;
     };
+    
+    // Capture Area and Send to Raycast (2+4)
+    combo_cap_raycast {
+        timeout-ms = <COMBO_FIRING_DECAY>;
+        key-positions = <POS_LH_C4R2 POS_LH_C2R2>;  // 2 + 4
+        bindings = <&kp _C(LC(N4))>;  // cmd+ctrl+4
+        layers = <0 1 2 3 4 5 6 7 8>;
+    };
 
     // Capture All-in-one (2+3+4)
     combo_capture_all {
@@ -1073,7 +1088,7 @@ combos {
 
     combo_loom {
         timeout-ms = <COMBO_FIRING_DECAY>;
-        key-positions = <POS_LH_C4R2 POS_LH_C2R2>;  // 2 + 4
+        key-positions = <POS_LH_C1R2 POS_LH_C2R2>;  // 4 + 5
         bindings = <&kp _C(LS(N7))>;  // cmd+shift+7
         layers = <0 1 2 3 4 5 6 7 8>;
     };
@@ -1103,8 +1118,15 @@ combos {
 
     combo_refresh {
         timeout-ms = <COMBO_FIRING_DECAY>;
-        key-positions = <POS_LH_C5R4 POS_LH_C3R3 POS_LH_C2R3>;  // A + D + R
+        key-positions = <POS_LH_C5R4 POS_LH_C3R3 POS_LH_C2R3>;  // A + E + R
         bindings = <&kp _C(R)>;  // cmd+r
+        layers = <0 1 2 3 4 5 6 7 8>;
+    };
+
+    combo_new {
+        timeout-ms = <COMBO_FIRING_DECAY>;
+        key-positions = <POS_LH_C5R4 POS_LH_C3R3>;  // A + E
+        bindings = <&kp _C(N)>;  // cmd+n
         layers = <0 1 2 3 4 5 6 7 8>;
     };
 
@@ -1126,6 +1148,13 @@ combos {
         timeout-ms = <COMBO_FIRING_DECAY>;
         key-positions = <POS_RH_C2R4 POS_RH_C3R3>;  // J + I
         bindings = <&kp LC(LS(TAB))>;  // ctrl+shift+tab
+        layers = <0 1 2 3 4 5 6 7 8>;
+    };
+
+    combo_show_tabs {
+        timeout-ms = <COMBO_FIRING_DECAY>;
+        key-positions = <POS_LH_C4R4 POS_LH_C1R3>;  // S + T
+        bindings = <&kp LC(LS(BSLH))>;  // cmd+shift+backslash
         layers = <0 1 2 3 4 5 6 7 8>;
     };
 
@@ -1204,7 +1233,7 @@ combos {
     combo_backslash {
         timeout-ms = <COMBO_FIRING_DECAY>;
         key-positions = <POS_RH_C3R5 POS_RH_C5R5>;  // COMMA + FSLH
-        bindings = <&kp BSLH>;  // \
+        bindings = <&kp BSLH>;
         layers = <0 1 2 3 4 5 6 7 8>;
     };
 
@@ -1289,9 +1318,16 @@ combos {
         layers = <0 1 2 3 4 5 6 7 8>;
     };
 
+    // combo_raycast_oneshot {
+    //     timeout-ms = <COMBO_FIRING_DECAY>;
+    //     key-positions = <POS_RH_C1R4 POS_RH_C5R4>;  // A + G
+    //     bindings = <&raycast_oneshot>;
+    //     layers = <0 1 2 3 4 5 6 7 8>;
+    // };
+
     combo_raycast_notes {
         timeout-ms = <COMBO_FIRING_DECAY>;
-        key-positions = <POS_RH_C2R4 POS_RH_C3R4 POS_RH_C4R4>;  // N + J + K
+        key-positions = <POS_RH_C2R4 POS_RH_C3R4 POS_RH_C4R4>;  // J + K + L
         bindings = <&kp _W(N)>;  // opt+n
         layers = <0 1 2 3 4 5 6 7 8>;
     };
@@ -4624,8 +4660,8 @@ behaviors {
     //     tap-ms = <0>;
     //     #binding-cells = <1>;
     //     bindings
-    //         = <&macro_param_1to1>
-    //         , <&macro_tap &kp _RAYCAST>
+    //         = <&macro_tap &kp _C(SPACE)>
+    //         , <&macro_param_1to1>
     //         , <&macro_tap &kp MACRO_PLACEHOLDER>
     //         , <&macro_tap &kp RETURN>
     //         ;
